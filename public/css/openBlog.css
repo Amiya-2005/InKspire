@@ -1,0 +1,155 @@
+      /* CSS Variables for easy theming */
+      :root {
+        --primary-color: #3498db;
+        --danger-color: #e74c3c;
+        --border-color: #ddd;
+        --light-bg: #fafafa;
+        --text-color: #333;
+        --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        --transition-speed: 0.3s;
+        --border-radius: 10px;
+      }
+
+      /* Global Styles */
+      body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        background-color: #f5f6fa;
+        margin: 0;
+        padding: 0;
+        color: var(--text-color);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Blog Card Styling */
+      .blog-card {
+        max-width: 85vw;
+        margin: 40px auto;
+        border: 2px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .blog-card .card-body {
+        padding: 20px;
+      }
+
+      .blog-card h2 {
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        color: #2c3e50;
+      }
+
+      .blog-card p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      /* Author Section */
+      .author-info {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .author-info img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+      }
+
+      .author-info span {
+        font-size: 1rem;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      /* Action Buttons Styling */
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .action-buttons a.btn {
+        transition: background-color var(--transition-speed), transform var(--transition-speed);
+      }
+
+      .action-buttons a.btn:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Cover Image Styling */
+      .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+
+      /* Comments Card Styling */
+      .comments-card {
+        max-width: 85vw;
+        margin: 20px auto;
+        padding: 20px;
+        border: 2px solid lavender;
+        background: var(--light-bg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .blog-card {
+          max-width: 95vw;
+        }
+        .blog-card .row {
+          flex-direction: column;
+        }
+        .cover-image {
+          border-radius: var(--border-radius);
+          height: 20rem;
+        }
+      }
+  /* Modal Custom Styling */
+  .modal-content {
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .modal-body {
+    font-size: 1rem;
+    color: #444;
+  }
+
+  .modal-text {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-danger {
+    background-color: #d32f2f;
+    border-color: #c62828;
+  }
+
+  .btn-danger:hover {
+    background-color: #b71c1c;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }

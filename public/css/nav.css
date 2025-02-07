@@ -1,0 +1,49 @@
+/* Navbar background with a professional, subtle gradient */
+.bg-custom {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+  }
+
+  /* Navigation link animations */
+  .nav-animate {
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .nav-animate:hover {
+    color: #ffde59;
+    transform: translateY(-3px);
+  }
+
+  /* Active nav link highlighting with a pulse effect */
+  .nav-link.active {
+    color: #ffde59 !important;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Dropdown items hover effect */
+  .dropdown-item:hover {
+    background-color: rgba(52, 73, 94, 0.1);
+  }
+
+  .alert-container {
+    position: fixed;
+    top: -100px; /* Initially hidden above the viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    max-width: 600px;
+    width: 100%;
+    transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+  }
+
+  .alert-container.show {
+    top: 20px; /* Slides down to this position */
+    opacity: 1;
+  }

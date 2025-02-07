@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Blog</title>
+    <style>
+      /* Set a subtle light background for the page */
+      body {
+        background-color: #f7f9fc;
+      }
+
+      /* Center the form container and style it */
+      .container {
+        max-width: 600px;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+      }
+
+      /* Enhance form labels */
+      .form-label {
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* Style form controls with smooth transitions */
+      .form-control {
+        transition: all 0.3s ease;
+        border-radius: 5px;
+      }
+
+      .form-control:focus {
+        box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+        border-color: #4e73df;
+      }
+
+      /* Button hover effects */
+      button.btn {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border-radius: 5px;
+      }
+
+      button.btn:hover {
+        background-color: #2e59d9;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-3">
+      <form action="/blog/addBlog" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="coverImage" class="form-label">Cover Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="coverImage"
+            name="coverImage"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="What do you want to talk about ?"
+            id="title"
+            name="title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="floatingTextArea" class="form-label">Body</label>
+          <textarea
+            class="form-control"
+            placeholder="Can you describe it ?"
+            id="floatingTextArea"
+            name="body"
+          ></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <%- include("./partials/script") %>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Blog</title>
+
+    <link rel="stylesheet"  href="/css/openBlog.css" />
+
+  </head>
+  <body>
+    <%- include("./partials/nav") %>
+    <% const blog = specificBlog %>
+    <div class="container">
+      <!-- Blog Card -->
+      <div class="card blog-card">
+        <div class="row g-0">
+          <!-- Blog Content -->
+          <div class="col-md-6 d-flex flex-column">
+            <div class="card-body">
+              <h2 class="card-title"><%= blog.title %></h2>
+              <p class="card-text"><%= blog.body %></p>
+            </div>
+            <!-- Author and Action Buttons -->
+            <div class="d-flex flex-row justify-content-between align-items-center px-4 pb-3">
+              <div class="author-info">
+                <img src="/images/default.jpeg" alt="Default image">
+                <span><%= blog.authorName %></span>
+              </div>
+              <% if (locals.user && (user._id).equals(blog.createdBy)) { %>
+                <div class="action-buttons">
+                  <a href="/blog/editBlog/<%= blog._id %>" class="btn btn-primary">Edit</a>
+
+
+                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                    Delete
+                  </button>
+                
+                <!-- Delete Confirmation Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill text-danger"></i> Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    
+                    <!-- Modal Body -->
+                    <div class="modal-body text-center">
+                        <p class="modal-text">Are you sure you want to delete this blog? <br> <strong>This action cannot be undone.</strong></p>
+                    </div>
+                
+                    <!-- Modal Footer -->
+                    <div class="modal-footer justify-content-center">
+                        <form action="/blog/deleteBlog/<%= blog._id %>" method="post">
+                        <button type="submit" class="btn btn-danger px-4">Yes, Delete</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                
+                    </div>
+                </div>
+                </div>
+                
+                <!-- modal ends -->
+
+
+                </div>
+              <% } %>
+            </div>
+          </div>
+          <!-- Cover Image -->
+          <div class="col-md-6">
+            <img src="<%= blog.coverImageUrl %>" class="cover-image" alt="Blog Cover Image">
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="card comments-card">
+        <h4>Comments (<%= blog.comments.length %>)</h4>
+        <!-- Additional comments can be rendered here -->
+      </div>
+    </div>
+
+    <%- include("./partials/script") %>
+  </body>
+</html>

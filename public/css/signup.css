@@ -1,0 +1,72 @@
+:root {
+    --primary-color: #3498db;
+    --primary-hover: #2980b9;
+    --text-color: #333;
+    --bg-color: #f5f6fa;
+    --card-bg: #fff;
+    --card-border: #ddd;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 10px;
+  }
+
+  /* Global Styles */
+  body {
+    background-color: var(--bg-color);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Centering container */
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Signup Card Styling */
+  .signup-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-top: 50px;
+  }
+
+  .signup-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  /* Input styling for consistency */
+  .form-control {
+    border-radius: var(--border-radius);
+  }
+
+  /* Button Styling */
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    width: 100%;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+  }
+
+  /* Form Text Styling */
+  .form-text {
+    font-size: 0.9rem;
+    color: #666;
+  }
