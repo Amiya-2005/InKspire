@@ -14,7 +14,7 @@ const login = async (req, res) => {
 
             req.flash("message", "<strong>Error </strong> Please signup first.");
             req.flash("success", false);
-            return res.redirect("/signup");
+            return res.redirect("/user/signup");
         }
 
         const hashedPassword = user.password;
@@ -24,7 +24,7 @@ const login = async (req, res) => {
 
             req.flash("message", "<strong>Error </strong> Incorrect password.");
             req.flash("success", false);
-            return res.redirect("/login");
+            return res.redirect("/user/login");
         }  
 
         user.password = undefined;
@@ -48,7 +48,7 @@ const login = async (req, res) => {
 
         req.flash("message", "<strong>Server Error...</strong> Please try again later.");
         req.flash("success", failed);
-        return res.redirect("/login");
+        return res.redirect("/user/login");
     }
 }
 

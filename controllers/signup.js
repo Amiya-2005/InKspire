@@ -12,7 +12,7 @@ const signup =async (req, res) => {
 
             req.flash("message", "User has already registered before.");
             req.flash("success", false);
-            return res.redirect("/login");
+            return res.redirect("/user/login");
         }
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -26,7 +26,7 @@ const signup =async (req, res) => {
 
         req.flash("message", "<strong>Success!</strong> User registered successfully.");
         req.flash("success", true);
-        return res.redirect("/login");
+        return res.redirect("/user/login");
 
     } 
     catch (err) {
@@ -34,7 +34,7 @@ const signup =async (req, res) => {
 
         req.flash("message", "<strong>Server Error...!</strong> Please try again later.");
         req.flash("success", false);
-        return res.redirect("/signup");
+        return res.redirect("/user/signup");
     }
 }
 

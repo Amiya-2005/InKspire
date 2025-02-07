@@ -24,8 +24,6 @@ app.use((req, res, next) => {
     res.locals.message = req.flash('message')[0];
     res.locals.success = req.flash('success')[0];
 
-    console.log("MSG IS: ",res.locals.message);
-    console.log("status IS: ",res.locals.success);
     next();
 });
 
