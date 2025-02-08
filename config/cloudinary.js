@@ -16,3 +16,21 @@ exports.cloudinaryConnect = () => {
         console.log("Cloudinary could not be connected.❌")
     }
 }
+
+exports.uploadFileToCloudinary = async (file, folder, quality) => {
+    const options = {
+      folder,
+      resource_type: "auto",
+    };
+    if (quality) options.quality = quality;
+  
+    console.log("Cloudinary options:", options);
+  
+    try {
+      const up = await cloudinary.uploader.upload(file.tempFilePath, options);
+      return up;
+    } catch (error) {
+      console.error("Cloudinary upload error:", error);
+      throw error;
+    }
+  }
