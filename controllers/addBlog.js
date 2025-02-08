@@ -1,8 +1,5 @@
 const Blog = require("../models/Blog");
 const cloudinary = require("cloudinary").v2;
-// If you have an email service, keep its import as is.
-// For example:
-// const { sendBlogCreatedEmail } = require("../services/mailer");
 
 /**
  * Uploads the file to Cloudinary.
@@ -69,7 +66,7 @@ module.exports = async (req, res) => {
         });
     }
 
-    // Optionally, fire off the mailing process asynchronously.
+    // later to do , fire off the mailing process asynchronously.
     // if (typeof sendBlogCreatedEmail === "function") {
     //   sendBlogCreatedEmail(user.email, blog)
     //     .then(() => console.log("Email sent successfully"))
