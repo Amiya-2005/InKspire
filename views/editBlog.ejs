@@ -52,6 +52,18 @@
       <h2 class="mb-4 text-center">Edit Blog Post</h2>
       <form action="/blog/editBlog/<%= locals.specificBlog._id %>" method="post" enctype="multipart/form-data">
 
+        <!--Cover Image Update(Optional)-->
+        <div class="mb-3">
+          <label for="coverImage" class="form-label">Cover Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="coverImage"
+            name="coverImage"
+          />
+          <small class="text-muted">Leave it blank if you don't want to update the cover image.</small>
+        </div>
+
         <!-- Title Input -->
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
