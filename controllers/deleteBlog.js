@@ -23,17 +23,17 @@ module.exports = async (req, res) => {
     }
 
     // Delete Blog
-    // await Blog.findByIdAndDelete(req.params.blogId);
+    await Blog.findByIdAndDelete(req.params.blogId);
 
-    // // Delete Cover Image from Cloudinary (if exists)
-    // if (thisBlog.coverImagePublicId) {
-    //     try {
-    //         await cloudinary.uploader.destroy(thisBlog.coverImagePublicId);
-    //         console.log("Image removed from Cloudinary.");
-    //     } catch (error) {
-    //         console.log("Failed to remove image from Cloudinary.");
-    //     }
-    // }
+    // Delete Cover Image from Cloudinary (if exists)
+    if (thisBlog.coverImagePublicId) {
+        try {
+            await cloudinary.uploader.destroy(thisBlog.coverImagePublicId);
+            console.log("Image removed from Cloudinary.");
+        } catch (error) {
+            console.log("Failed to remove image from Cloudinary.");
+        }
+    }
 
     req.flash("message", "Blog deleted successfully.");
     req.flash("success", true);

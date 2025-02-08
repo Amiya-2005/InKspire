@@ -7,7 +7,7 @@ const checkForAuthenticationCookie = (cookieName) => {
             return next();
         }
         try{
-            console.log("Assigned JWT token is ",tokenCookieValue);
+            //console.log("Assigned JWT token is ",tokenCookieValue);
             const userPayload = validateToken(tokenCookieValue);
             req.user = userPayload;
             return next();

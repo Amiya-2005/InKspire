@@ -1,30 +1,10 @@
 const Blog = require("../models/Blog");
-const cloudinary = require("cloudinary").v2;
-// If you have an email service, keep its import as is.
-// For example:
-// const { sendBlogCreatedEmail } = require("../services/mailer");
 
+const { uploadFileToCloudinary } = require("../config/cloudinary");
 /**
  * Uploads the file to Cloudinary.
  * This version returns the upload promise so it can be used in a fire-and-forget manner.
  */
-async function uploadFileToCloudinary(file, folder, quality) {
-  const options = {
-    folder,
-    resource_type: "auto",
-  };
-  if (quality) options.quality = quality;
-
-  console.log("Cloudinary options:", options);
-
-  try {
-    const up = await cloudinary.uploader.upload(file.tempFilePath, options);
-    return up;
-  } catch (error) {
-    console.error("Cloudinary upload error:", error);
-    throw error;
-  }
-}
 
 /**
  * Main handler for adding a blog.
@@ -47,7 +27,7 @@ module.exports = async (req, res) => {
   });
 
   try {
-    // Save the blog immediately so that the user gets a fast response.
+    //Save the blog immediately so that the user gets a fast response.
     await blog.save();
     console.log("Blog saved without cover image:", blog);
 
@@ -65,16 +45,9 @@ module.exports = async (req, res) => {
         })
         .catch((uploadError) => {
           console.error("Cover image upload failed:", uploadError);
-          // Optionally, log the error and consider notifying the user/admin later.
         });
     }
 
-    // Optionally, fire off the mailing process asynchronously.
-    // if (typeof sendBlogCreatedEmail === "function") {
-    //   sendBlogCreatedEmail(user.email, blog)
-    //     .then(() => console.log("Email sent successfully"))
-    //     .catch((mailError) => console.error("Email sending failed:", mailError));
-    // }
 
     // Render the response immediately.
 

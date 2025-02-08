@@ -1,0 +1,4 @@
+add comments and likes
+add my profile for user (Display my blogs, my comments, my liked blogs there)
+sort the blogs by types in home page (All as a cluster doesn't look nice)
+add search bar 
