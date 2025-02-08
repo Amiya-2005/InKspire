@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     }
 
     // Delete Blog
-     await Blog.findByIdAndDelete(req.params.blogId);
+    await Blog.findByIdAndDelete(req.params.blogId);
 
     // Delete Cover Image from Cloudinary (if exists)
     if (thisBlog.coverImagePublicId) {
