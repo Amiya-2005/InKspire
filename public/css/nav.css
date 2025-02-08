@@ -47,3 +47,20 @@
     top: 20px; /* Slides down to this position */
     opacity: 1;
   }
+
+/* for logout section */
+
+
+
+
+  .btn-outline-light {
+    color: white;
+    border-color: blueviolet;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: white;
+    color: #1e1e2f;
+  }
+
