@@ -5,9 +5,17 @@ const mongoose = require("mongoose");
 
 module.exports = async (req,res) => {
     const blogId = req.params.blogId;
-    const specificBlog = await Blog.findById(blogId);
+    const specificBlog = await Blog.findById(blogId)
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'person',
+        model: 'User',
+        select: 'fullName profilePic'
+      }
+    });
 
-    console.log("Cov" ,specificBlog.coverImageUrl);
+    console.log("Full Blog Data" ,specificBlog);
 
     const authorId = specificBlog.createdBy;
     const author = await User.findById(authorId);

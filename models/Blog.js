@@ -3,6 +3,19 @@ const User = require("./User");
 const transporter = require("../config/mailSender");
 
 
+// Comment Sub-Schema with timestamps
+const commentSchema = new mongoose.Schema({
+    person: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+}, { timestamps: true });
+
 const blogSchema = new mongoose.Schema({
     title : {
         type : String,
@@ -15,7 +28,7 @@ const blogSchema = new mongoose.Schema({
     createdBy : {
         type : mongoose.Schema.Types.ObjectId,
         required : true,
-        ref : User,
+        ref : "User",
     },
     coverImageUrl : {
         type : String,
@@ -28,7 +41,7 @@ const blogSchema = new mongoose.Schema({
         type :  [{
              person : {
                  type :  mongoose.Schema.Types.ObjectId,
-                 ref : User,
+                 ref : "User",
                  required : true
              },
              likeOrDislike : {
@@ -39,24 +52,7 @@ const blogSchema = new mongoose.Schema({
          }],
          default : []
     },
-    comments : {
-       type :  [{
-            person : {
-                type :  mongoose.Schema.Types.ObjectId,
-                ref : User,
-                required : true
-            },
-            content : {
-                type : String,
-                required : true,
-            },
-            uploadedAt : {
-                type : Date,
-                default : Date.now
-            }
-        }],
-        default : []
-    },
+    comments : [commentSchema],
 }, { timestamps: true });
 
 
