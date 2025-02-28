@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     role : {
         type : String,
         enum : ["USER", "ADMIN"],
+    },
+    bio : {
+        type : String,
+        default : "Hello ! I am using InkSpire."
     }
 });
 
