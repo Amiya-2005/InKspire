@@ -3,6 +3,7 @@ const router = express.Router();
 
 const login = require("../controllers/login");
 const signup = require("../controllers/signup");
+const profile = require("../controllers/profile");
 
 
 router.get("/login", (req,res) => {
@@ -22,7 +23,7 @@ router.get("/signup", (req,res) => {
 })
 
 
-
+router.get("/profile/:profileId", profile);
 
 router.post("/signup", signup);
 router.post("/login", login);

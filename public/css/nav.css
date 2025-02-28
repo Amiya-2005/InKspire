@@ -1,66 +1,186 @@
-/* Navbar background with a professional, subtle gradient */
+/* Modern Navbar with Depth and Professional Appearance */
 .bg-custom {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-  }
+  background: linear-gradient(135deg, #1a2a3a, #2c3e50);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+}
 
-  /* Navigation link animations */
+/* Brand logo styling */
+.navbar-brand {
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  color: #ffde59;
+}
+
+/* Navigation link animations with improved hover effect */
+.nav-animate {
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+}
+
+.nav-animate:hover {
+  color: #ffde59;
+  transform: translateY(-3px);
+}
+
+.nav-animate::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #ffde59;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-animate:hover::after {
+  width: 70%;
+}
+
+/* Active nav link styling with subtle pulse effect */
+.nav-link.active {
+  color: #ffde59 !important;
+  animation: pulse 2s infinite;
+}
+
+.nav-link.active::after {
+  width: 70%;
+  background-color: #ffde59;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Profile picture styling */
+.rounded-circle {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover .rounded-circle {
+  border-color: #ffde59;
+  transform: scale(1.05);
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  background-color: #fff;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+  padding: 0.6rem 1.5rem;
+  transition: all 0.2s ease;
+  color: #2c3e50;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(52, 73, 94, 0.1);
+  transform: translateX(5px);
+}
+
+.dropdown-item i {
+  transition: transform 0.2s ease;
+}
+
+.dropdown-item:hover i {
+  transform: scale(1.2);
+}
+
+/* Alert styling */
+.alert-container {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  max-width: 600px;
+  width: 90%;
+  transition: top 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+}
+
+.alert-container.show {
+  top: 20px;
+  opacity: 1;
+}
+
+.alert {
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.5s ease forwards;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, #dc3545, #ff6b6b);
+  color: white;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom button styling */
+.btn-outline-light {
+  color: white;
+  border-color: #7952b3;
+  transition: all 0.2s ease;
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+}
+
+.btn-outline-light:hover {
+  background-color: #9370DB;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 992px) {
+  .navbar-nav {
+    padding: 1rem 0;
+  }
+  
   .nav-animate {
-    position: relative;
-    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 0.75rem 1rem;
+    margin: 0;
   }
-
-  .nav-animate:hover {
-    color: #ffde59;
-    transform: translateY(-3px);
+  
+  .dropdown-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+    margin-top: 0;
   }
-
-  /* Active nav link highlighting with a pulse effect */
-  .nav-link.active {
-    color: #ffde59 !important;
-    animation: pulse 1.5s infinite;
-  }
-
-  @keyframes pulse {
-    0%   { transform: scale(1); }
-    50%  { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-
-  /* Dropdown items hover effect */
-  .dropdown-item:hover {
-    background-color: rgba(52, 73, 94, 0.1);
-  }
-
-  .alert-container {
-    position: fixed;
-    top: -100px; /* Initially hidden above the viewport */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1050;
-    max-width: 600px;
-    width: 100%;
-    transition: top 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    opacity: 0;
-  }
-
-  .alert-container.show {
-    top: 20px; /* Slides down to this position */
-    opacity: 1;
-  }
-
-/* for logout section */
-
-
-
-
-  .btn-outline-light {
-    color: white;
-    border-color: blueviolet;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn-outline-light:hover {
-    background-color: white;
-    color: #1e1e2f;
-  }
-
+}

@@ -7,7 +7,7 @@ const createToken = (user) => {
         _id : user._id.toString(),   //json serialization automatically converts (Can't do anything) So converted myself to avoid further confusion
         fullName : user.fullName,
         email : user.email,
-        profileImageUrl : user.profileImageUrl,
+        profilePic : user.profilePic,
         role :user.role
     }
     const token = JWT.sign(payload, secret);
@@ -20,3 +20,5 @@ const validateToken = (token) => {
 }
 
 module.exports = {createToken, validateToken};
+//create token used in login.js
+//validate used in middleware

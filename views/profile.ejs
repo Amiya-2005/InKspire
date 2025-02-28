@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css" />
+    
+  </head>
+  <body>
+    <%- include("./partials/nav") %> 
+
+    <div class="container profile-container mt-5 mb-5">
+      <div class="profile-card">
+        <!-- Profile Section with Image and Details -->
+        <div class="profile-section">
+          <!-- Profile Picture in Center -->
+          <div class="profile-pic-container">
+            <img src="<%= owner.profilePic %>" alt="<%= owner.fullName %>'s Profile Picture" class="profile-pic" id="profilePic">
+          </div>
+          
+          <!-- User Details on Top Right -->
+          <div class="profile-details">
+            <h2 class="user-name fw-bold"><%= owner.fullName %></h2>
+            <p class="user-email"><i class="fas fa-envelope"></i> <%= owner.email %></p>
+            
+            <% if(user._id == owner._id){ %>
+              <a href="/edit-profile" class="btn edit-profile-btn">
+                <i class="fas fa-pencil-alt me-2"></i>Edit Profile
+              </a>
+            <% } %>
+          </div>
+          
+          <!-- Bio Section on Bottom Right -->
+          <div class="profile-bio-container">
+            <div class="profile-bio">
+              <h5 class="bio-title fw-bold">About</h5>
+              <p class="mb-0"><%= owner.bio || "This user hasn't added a bio yet." %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blog Posts Section -->
+      <div class="mt-5">
+        <h2 class="section-title">Blog Posts</h2>
+        
+        <% if (owner.blogsArray.length > 0) { %>
+          <div class="blog-posts">
+            <% owner.blogsArray.forEach(blog => { %>
+              <div class="card blog-post-card p-0 mb-3">
+                <div class="card-body p-4">
+                  <h4>
+                    <a href="/blog/openBlog/<%= blog._id %>" class="blog-title">
+                      <%= blog.title %>
+                    </a>
+                  </h4>
+                  <p class="blog-date mb-2">
+                    <i class="far fa-calendar-alt me-2 icon-calendar"></i>
+                    <%= new Date(blog.createdAt).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    }) %>
+                  </p>
+                  <p class="blog-preview"><%= blog.body.substring(0, 150) %>
+                    <% if (blog.body.length > 150) { %>
+                      ...
+                    <% } %>
+                  </p>
+                  <div class="blog-footer">
+                    <a href="/blog/openBlog/<%= blog._id %>" class="read-more-link">
+                      Read more <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          </div>
+        <% } else { %>
+          <div class="empty-state">
+            <i class="fas fa-feather-alt fa-3x mb-3 text-muted"></i>
+            <h4>No blog posts yet</h4>
+            <p class="text-muted mb-0">
+              <%= user._id == owner._id ? "You haven't written any blog posts yet. Start writing to see them here!" : "This user hasn't written any blog posts yet." %>
+            </p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="imageLightbox">
+      <img src="" alt="Profile Picture" class="lightbox-img" id="lightboxImg">
+      <div class="close-lightbox" id="closeLightbox">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+
+    <%- include("./partials/script") %>
+    <script>
+      // Add Font Awesome if not already included
+      if (!document.querySelector('link[href*="font-awesome"]')) {
+        const fontAwesome = document.createElement('link');
+        fontAwesome.rel = 'stylesheet';
+        fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+        document.head.appendChild(fontAwesome);
+      }
+      
+      // Lightbox functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const profilePic = document.getElementById('profilePic');
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeLightbox = document.getElementById('closeLightbox');
+        
+        // Open lightbox when profile pic is clicked
+        profilePic.addEventListener('click', function() {
+          lightboxImg.src = profilePic.src;
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        });
+        
+        // Close lightbox when clicking the close button
+        closeLightbox.addEventListener('click', function(e) {
+          e.stopPropagation();
+          closeLightboxFunc();
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox) {
+            closeLightboxFunc();
+          }
+        });
+        
+        // Close lightbox on Escape key press
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightboxFunc();
+          }
+        });
+        
+        function closeLightboxFunc() {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = ''; // Restore scrolling
+          
+          // Wait for the transition to complete before removing the src
+          setTimeout(() => {
+            lightboxImg.src = '';
+          }, 300);
+        }
+      });
+    </script>
+  </body>
+</html>

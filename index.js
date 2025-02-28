@@ -11,6 +11,7 @@ app.set("views", path.resolve("./views"));
 const flash = require("connect-flash");
 const session = require("express-session");
 
+app.use(express.static("public"));
 app.use(session({
     secret: "your_secret_key",  // Change this to a secure key
     resave: false,

@@ -11,30 +11,20 @@ module.exports = async (req,res) => {
 
     const authorId = specificBlog.createdBy;
     const author = await User.findById(authorId);
-    specificBlog.authorName = author.fullName;
+    // specificBlog.authorName = author.fullName;
 
 
-    console.log("Author : ",specificBlog.createdBy);
-
+    console.log("author : ",author);
+    author.password = undefined;
 
     const user = req.user;
 
-    if(user) user._id = new mongoose.Types.ObjectId(user._id);     //converting string to objectId to compare using .equals() in frontend
+    console.log("user : ",user);
 
-    console.log("User : ",req.user);
-    console.log("Specific Blog : ",specificBlog);
-
-    console.log(specificBlog.title);
-
-
-
-    //Don't print these (Only for debugging when loggedin)
-    // console.log("Printing types: ");
-    // console.log(typeof user._id, user._id.constructor.name); // Should show 'object' and 'ObjectId'
-    // console.log(typeof specificBlog.createdBy, specificBlog.createdBy.constructor.name); // Should show 'object' and 'ObjectId'
     
     return res.render("openBlog", {
         user,
+        author,
         specificBlog
     });
 

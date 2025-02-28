@@ -56,8 +56,8 @@ const blogSchema = new mongoose.Schema({
             }
         }],
         default : []
-    }
-});
+    },
+}, { timestamps: true });
 
 
 blogSchema.post("save", async (doc) =>{
