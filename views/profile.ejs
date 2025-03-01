@@ -25,7 +25,7 @@
             <h2 class="user-name fw-bold"><%= owner.fullName %></h2>
             <p class="user-email"><i class="fas fa-envelope"></i> <%= owner.email %></p>
             
-            <% if(user._id == owner._id){ %>
+            <% if(user && user._id == owner._id){ %>
               <a href="#" class="btn edit-profile-btn">
                 <i class="fas fa-pencil-alt me-2"></i>Edit Profile
               </a>
