@@ -74,19 +74,16 @@ app.get("/home", async (req,res) => {
     });
 });
 
-//for redirect(From cross button of alert)
-//if you get any better approach update here
-app.post("/home", async (req,res) => {
-    // const allBlogs = await Blog.find({}); 
-
-    // res.render("home", {
-    //     user : req.user,
-    //     allBlogs
-    // });
-    res.redirect('/home');
+app.get("/create", async(req,res) => {
+    if(req.user){
+        res.redirect("/blog/addBlog")
+    }
+    else{
+        req.flash("message", "Please Sign up first.");
+        req.flash("success", false);
+        res.redirect("/user/signup");
+    }
 })
-
-
 
 
 

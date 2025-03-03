@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error("Error saving blog:", error);
 
-    req.flash("message", "<strong>Error!</strong> Blog creation failed. Please try again later.");
+    req.flash("message", "Blog creation failed. Please try again later.");
     req.flash("success", false);
     return res.redirect("/home");
   }

@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= specificBlog.title %> | InKspire</title>
     <link rel="stylesheet" href="/css/openBlog.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+
   </head>
   <body>
     <%- include("./partials/nav") %> <% const blog = specificBlog %>
@@ -25,7 +27,7 @@
                   'numeric', month: 'long', day: 'numeric' }) %></span
                 >
               </div>
-              <p class="card-text"><%= blog.body %></p>
+              <p class="card-text"><%- blog.body %></p>
             </div>
 
             <!-- Author and Action Buttons -->
@@ -387,5 +389,7 @@
         });
       });
     </script>
+    <%- include("./partials/footer") %>
+
   </body>
 </html>

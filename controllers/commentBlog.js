@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
 
 
     if(comment.length == 0){
-        req.flash("message", "<strong>Failure!</strong> Unable to post empty comment.");
+        req.flash("message", "Unable to post empty comment.");
         req.flash("success", false);
         return res.redirect("/blog/openBlog/" + req.params.blogId);
     }

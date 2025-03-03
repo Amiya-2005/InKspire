@@ -1,0 +1,139 @@
+/* Footer Styling */
+:root {
+    --primary-color: #4e73df;
+    --primary-dark: #2e59d9;
+    --footer-bg: #1f2937;
+    --footer-text: #f3f4f6;
+  }
+  
+  .footer-section {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 4rem 0 1rem;
+    margin-top: 4rem;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  
+  .footer-logo {
+    margin-bottom: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-logo {
+      margin-bottom: 0;
+      width: 30%;
+    }
+  }
+  
+  .footer-logo h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-logo p {
+    color: #a1a1aa;
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .footer-column {
+    min-width: 160px;
+  }
+  
+  .footer-column h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  
+  .footer-column h4:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-color);
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .footer-column ul li a {
+    color: #d1d5db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-column ul li a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid #374151;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .social-icons {
+      margin-top: 0;
+    }
+  }
+  
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #374151;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+  }

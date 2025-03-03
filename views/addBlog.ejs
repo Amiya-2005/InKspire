@@ -4,90 +4,202 @@
     <%- include("./partials/head") %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Blog</title>
-    <style>
-      /* Set a subtle light background for the page */
-      body {
-        background-color: #f7f9fc;
-      }
+    <title>Create Blog Post</title>
 
-      /* Center the form container and style it */
-      .container {
-        max-width: 600px;
-        background: #ffffff;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        margin-top: 50px;
-      }
-
-      /* Enhance form labels */
-      .form-label {
-        font-weight: 600;
-        color: #333;
-      }
-
-      /* Style form controls with smooth transitions */
-      .form-control {
-        transition: all 0.3s ease;
-        border-radius: 5px;
-      }
-
-      .form-control:focus {
-        box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
-        border-color: #4e73df;
-      }
-
-      /* Button hover effects */
-      button.btn {
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        border-radius: 5px;
-      }
-
-      button.btn:hover {
-        background-color: #2e59d9;
-        transform: translateY(-2px);
-      }
-    </style>
+    <link rel="stylesheet" href="/css/addBlog.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   </head>
   <body>
     <%- include("./partials/nav") %>
 
-    <div class="container mt-3">
-      <form action="/blog/addBlog" method="post" enctype="multipart/form-data">
-        <div class="mb-3">
-          <label for="coverImage" class="form-label">Cover Image</label>
-          <input
-            type="file"
-            class="form-control"
-            id="coverImage"
-            name="coverImage"
-          />
+    <div class="blog-form-page">
+      <div class="blog-form-container">
+        <div class="blog-form-card">
+          <div class="blog-form-header">
+            <h1 class="blog-form-title">Create Your Blog Post</h1>
+            <p class="blog-form-subtitle">Share your thoughts, ideas, and stories with our community</p>
+          </div>
+          
+          <div class="blog-form-body">
+            <form action="/blog/addBlog" method="post" enctype="multipart/form-data" id="blogForm">
+              <!-- Cover Image Upload -->
+              <div class="blog-form-group">
+                <label for="coverImage" class="blog-form-label">Cover Image</label>
+                <div class="blog-file-wrapper">
+                  <div class="blog-file-control">
+                    <i class="fa-solid fa-cloud-arrow-up blog-file-icon"></i>
+                    <span class="blog-file-text">Click or drop files to upload</span>
+                  </div>
+                  <input
+                    type="file"
+                    class="blog-file-input"
+                    id="coverImage"
+                    name="coverImage"
+                    accept="image/*"
+                  />
+                </div>
+                <span class="blog-help-text">Recommended size: 1200x630 pixels (16:9 ratio)</span>
+                
+                <div class="blog-image-preview" id="imagePreview">
+                  <img id="previewImg" class="blog-preview-img" src="#" alt="Preview" />
+                  <div class="blog-preview-overlay" id="removePreview">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Blog Title -->
+              <div class="blog-form-group">
+                <div class="d-flex justify-content-between">
+                  <label for="title" class="blog-form-label">Title</label>
+                  <span class="blog-char-counter"><span id="titleCounter">0</span>/100</span>
+                </div>
+                <input
+                  type="text"
+                  class="blog-form-control"
+                  placeholder="What's your blog post about?"
+                  id="title"
+                  name="title"
+                  maxlength="100"
+                />
+                <span class="blog-help-text">Create a compelling title that captures attention</span>
+              </div>
+              
+              <!-- Blog Content -->
+              <div class="blog-form-group">
+                <label for="content" class="blog-form-label">Content</label>
+                <div class="blog-editor-toolbar">
+                  <button type="button" class="blog-editor-button" onclick="execCmd('bold')" title="Bold">
+                    <i class="fa-solid fa-bold"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('italic')" title="Italic">
+                    <i class="fa-solid fa-italic"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('underline')" title="Underline">
+                    <i class="fa-solid fa-underline"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('formatBlock', 'h2')" title="Heading">
+                    <i class="fa-solid fa-heading"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('createLink', prompt('Enter URL:', 'https://'))" title="Link">
+                    <i class="fa-solid fa-link"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('insertUnorderedList')" title="Bullet List">
+                    <i class="fa-solid fa-list-ul"></i>
+                  </button>
+                  <button type="button" class="blog-editor-button" onclick="execCmd('insertOrderedList')" title="Numbered List">
+                    <i class="fa-solid fa-list-ol"></i>
+                  </button>
+                </div>
+                
+                <!-- Replace textarea with contenteditable div and hidden input -->
+                <div id="editor" class="blog-form-control blog-editor" contenteditable="true"></div>
+                <input type="hidden" name="body" id="hiddenContent">
+                
+                <span class="blog-help-text">Express yourself - tell your story with detail and clarity</span>
+              </div>
+              
+              <!-- Submit Button -->
+              <div class="blog-form-actions">
+                <button type="submit" class="blog-submit-button" id="submitBtn">
+                  <span>Publish Post</span>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="What do you want to talk about ?"
-            id="title"
-            name="title"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="floatingTextArea" class="form-label">Body</label>
-          <textarea
-            class="form-control"
-            placeholder="Can you describe it ?"
-            id="floatingTextArea"
-            name="body"
-          ></textarea>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
     </div>
 
+    <%- include("./partials/footer") %>
+
     <%- include("./partials/script") %>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Image Preview Functionality
+        const coverImage = document.getElementById('coverImage');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const removePreview = document.getElementById('removePreview');
+        
+        coverImage.addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              previewImg.src = e.target.result;
+              imagePreview.style.display = 'block';
+              imagePreview.classList.add('fade-in');
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+        
+        removePreview.addEventListener('click', function() {
+          imagePreview.style.display = 'none';
+          coverImage.value = '';
+        });
+        
+        // Title Character Count
+        const title = document.getElementById('title');
+        const titleCounter = document.getElementById('titleCounter');
+        
+        title.addEventListener('input', function() {
+          const count = this.value.length;
+          titleCounter.textContent = count;
+          
+          if (count > 80) {
+            titleCounter.style.color = '#f59e0b';
+          } else {
+            titleCounter.style.color = '';
+          }
+        });
+        
+        // Form Submission
+        const blogForm = document.getElementById('blogForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const editor = document.getElementById('editor');
+        const hiddenContent = document.getElementById('hiddenContent');
+        
+        blogForm.addEventListener('submit', function(e) {
+          // Update hidden input with editor content
+          hiddenContent.value = editor.innerHTML;
+          
+          // Change button state
+          submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Publishing...';
+          submitBtn.disabled = true;
+        });
+      });
+      
+      // Rich Text Editor Functions
+      function execCmd(command, value = null) {
+        document.execCommand(command, false, value);
+        document.getElementById('editor').focus();
+      }
+    </script>
+    
+    <style>
+      /* Add these styles to make the editor look like a textarea */
+      .blog-editor {
+        min-height: 250px;
+        text-align: left;
+        overflow-y: auto;
+        padding: 12px;
+        outline: none;
+        white-space: pre-wrap;
+      }
+      
+      .blog-editor:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+      }
+      
+      .blog-editor-button.active {
+        background-color: #e0e7ff;
+        color: #4f46e5;
+      }
+    </style>
   </body>
 </html>

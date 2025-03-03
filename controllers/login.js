@@ -12,7 +12,7 @@ const login = async (req, res) => {
         if(!user){
             console.log("Please sign up first.");
 
-            req.flash("message", "<strong>Error </strong> Please signup first.");
+            req.flash("message", "Please signup first.");
             req.flash("success", false);
             return res.redirect("/user/signup");
         }
@@ -22,7 +22,7 @@ const login = async (req, res) => {
 
             console.log("Incorrect password.");
 
-            req.flash("message", "<strong>Error </strong> Incorrect password.");
+            req.flash("message", "Incorrect password.");
             req.flash("success", false);
             return res.redirect("/user/login");
         }  

@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
         }
     }
 
-    req.flash("message", "Blog deleted successfully.");
+    req.flash("message", "<strong>Success!</strong> Blog deleted successfully.");
     req.flash("success", true);
 
     return res.redirect("/home");

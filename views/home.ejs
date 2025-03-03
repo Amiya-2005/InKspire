@@ -6,27 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homepage</title>
 
-    <link rel="stylesheet"  href="/css/home.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
 
   </head>
   <body>
     <%- include("./partials/nav") %>
 
-    <div class="container my-3">
-      <div class="row row-cols-4 g-4">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Welcome to Your Blog</h1>
+        <p class="hero-subtitle">Discover stories, ideas, and insights that inspire</p>
+        <div class="hero-cta">
+          <a href="#latest-posts" class="btn btn-hero">Explore Articles</a>
+          <% if(user){ %>
+            <a href="/blog/addBlog" class="btn btn-outline">Create Post</a>          
+          <% }else{ %>
+            <a href="/user/signup" class="btn btn-outline">Get Started</a>
+          <% } %>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Posts Section (optional) -->
+    <div class="featured-section">
+      <div class="container">
+        <h2 class="section-title">Featured Posts</h2>
+        <div class="featured-posts">
+          <% if(allBlogs.length > 0) { %>
+            <div class="featured-card">
+              <img src="<%= allBlogs[0].coverImageUrl %>" alt="Featured post" class="featured-img">
+              <div class="featured-content">
+                <h3 class="featured-title"><%= allBlogs[0].title %></h3>
+                <p class="featured-excerpt">
+                  <%- allBlogs[0].body?.substring(0, 150) || "Explore this featured article" %>...
+                </p>
+                <a href="/blog/openBlog/<%= allBlogs[0]._id %>" class="btn btn-primary">Read More</a>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Posts Section -->
+    <div id="latest-posts" class="container my-5">
+      <h2 class="section-title">Latest Articles</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
         <% allBlogs.forEach(blog => { %>
           <div class="col">
             <div class="card">
-              <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="Cover image for <%= blog.title %>" />
+              <div class="card-img-container">
+                <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="Cover image for <%= blog.title %>" />
+              </div>
               <div class="card-body">
                 <h5 class="card-title"><%= blog.title %></h5>
-                <a href="/blog/openBlog/<%= blog._id %>" class="btn btn-primary">View</a>
+                
+                <div class="card-footer">
+                  <a href="/blog/openBlog/<%= blog._id %>" class="btn btn-primary">Read Article</a>
+                </div>
               </div>
             </div>
           </div>
         <% }); %>
       </div>
     </div>
+
+    <!-- Footer Component -->
+    <%- include("./partials/footer") %>
 
     <%- include("./partials/script") %>
   </body>
