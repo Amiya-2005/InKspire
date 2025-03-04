@@ -7,27 +7,39 @@
     <title><%= specificBlog.title %> | InKspire</title>
     <link rel="stylesheet" href="/css/openBlog.css" />
     <link rel="stylesheet" href="/css/footer.css" />
-
   </head>
   <body>
+    <%- include("./partials/loader") %>
+
     <%- include("./partials/nav") %> <% const blog = specificBlog %>
 
     <div class="container">
       <!-- Blog Card -->
       <div class="card blog-card">
+        <!-- Cover Image - Moved to the top -->
+        <div class="image-container" id="sourceImageContainer">
+          <img
+            src="<%= blog.coverImageUrl %>"
+            class="cover-image"
+            alt="<%= blog.title %> Cover Image"
+            id="sourceImage"
+          />
+        </div>
+
         <div class="row g-0">
           <!-- Blog Content -->
-          <div class="col-md-6 d-flex flex-column">
+          <div class="col-12">
             <div class="card-body">
               <h2 class="card-title"><%= blog.title %></h2>
               <div class="blog-meta mb-3">
-                <span class="date"
-                  ><i class="bi bi-calendar3 me-2"></i><%= new
+                <span class="date">
+                  <i class="bi bi-calendar3 me-2"></i><%= new
                   Date(blog.createdAt).toLocaleDateString('en-US', { year:
-                  'numeric', month: 'long', day: 'numeric' }) %></span
-                >
+                  'numeric', month: 'long', day: 'numeric' }) %>
+                </span>
               </div>
-              <p class="card-text"><%- blog.body %></p>
+              <!-- Blog content rendered as static HTML -->
+              <div class="blog-content"><%- blog.body %></div>
             </div>
 
             <!-- Author and Action Buttons -->
@@ -114,17 +126,7 @@
             </div>
           </div>
 
-          <!-- Cover Image -->
-          <div class="col-md-6">
-            <div class="image-container" id="sourceImageContainer">
-              <img
-                src="<%= blog.coverImageUrl %>"
-                class="cover-image"
-                alt="<%= blog.title %> Cover Image"
-                id="sourceImage"
-              />
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -232,6 +234,9 @@
     <%- include("./partials/script") %>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          document.querySelectorAll(".ql-tooltip").forEach((element) => element.remove());
+      })
       document.addEventListener("DOMContentLoaded", function () {
         // Example: Smooth scrolling for comment section
         const commentLinks = document.querySelectorAll(".comment-link");

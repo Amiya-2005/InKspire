@@ -11,6 +11,20 @@
 
   </head>
   <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="loader-container">
+        <div class="brand-loader">
+          <i class="bi bi-journal-richtext"></i>
+          <span>InKspire</span>
+        </div>
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+        <p class="loading-text">Loading amazing content...</p>
+      </div>
+    </div>
     <%- include("./partials/nav") %>
 
     <!-- Hero Section -->
@@ -42,7 +56,7 @@
               <div class="featured-content">
                 <h3 class="featured-title"><%= allBlogs[0].title %></h3>
                 <p class="featured-excerpt">
-                  <%- allBlogs[0].body?.substring(0, 150) || "Explore this featured article" %>...
+                  <%- allBlogs[0].body?.substring(0, 63) || "Explore this featured article" %>
                 </p>
                 <a href="/blog/openBlog/<%= allBlogs[0]._id %>" class="btn btn-primary">Read More</a>
               </div>

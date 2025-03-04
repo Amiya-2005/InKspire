@@ -4,59 +4,101 @@
     <%- include("./partials/head") %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up</title>
-
-
-    <link rel="stylesheet"  href="/css/signup.css" />
-
+    <title>SignUp | InKspire</title>
+    <link rel="stylesheet" href="/css/signup.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
+    <%- include("./partials/loader") %>
+
     <%- include("./partials/nav") %>
 
-    <div class="container">
-      <div class="signup-card">
-        <h2>Sign Up</h2>
-        <form action="/user/signup" method="post">
-          <div class="mb-3">
-            <label for="fullName" class="form-label">Full Name</label>
-            <input
-              type="text"
-              name="fullName"
-              class="form-control"
-              id="fullName"
-              required
-            />
+    <div class="signup-container">
+      <div class="signup-wrapper">
+        <div class="signup-card">
+          <div class="signup-header">
+            <h2>Create Your Account</h2>
+            <p>Join InKspire and start your creative journey</p>
           </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              class="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-              required
-            />
-            <div id="emailHelp" class="form-text">
-              We'll never share your email with anyone else.
+          
+          <form action="/user/signup" method="post" id="signupForm" class="signup-form">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <i class="fas fa-user input-icon"></i>
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  placeholder="Full Name"
+                  required
+                  minlength="2"
+                  maxlength="50"
+                />
+                <div class="input-error">Name must be 2-50 characters long</div>
+              </div>
             </div>
+
+            <div class="form-group">
+              <div class="input-wrapper">
+                <i class="fas fa-envelope input-icon"></i>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email Address"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                />
+                <div class="input-error">Please enter a valid email address</div>
+              </div>
+              <small class="form-hint">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+              <div class="input-wrapper">
+                <i class="fas fa-lock input-icon"></i>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Create Password"
+                  required
+                  minlength="8"
+                />
+                <span class="password-toggle">
+                  <i class="fas fa-eye-slash"></i>
+                </span>
+                <div class="input-error">Password must be at least 8 characters</div>
+              </div>
+              <div class="password-strength">
+                <div class="strength-bar"></div>
+                <div class="strength-text"></div>
+              </div>
+            </div>
+
+            
+
+            <button type="submit" class="signup-button">
+              Create Account
+            </button>
+          </form>
+
+          <div class="signup-footer">
+            <p>Already have an account? <a href="/user/login">Log In</a></p>
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              name="password"
-              class="form-control"
-              id="password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
+
+        <div class="signup-decorative-elements">
+          <div class="circle circle-1"></div>
+          <div class="circle circle-2"></div>
+          <div class="circle circle-3"></div>
+        </div>
       </div>
     </div>
 
     <%- include("./partials/script") %>
-
+    <script src="/js/signup.client.js"></script>
+    <%- include("./partials/footer") %>
   </body>
 </html>

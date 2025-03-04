@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
     
   </head>
   <body>
@@ -47,37 +48,58 @@
         <h2 class="section-title">Blog Posts</h2>
         
         <% if (owner.blogsArray.length > 0) { %>
-          <div class="blog-posts">
+          <div class="blog-list-container">
             <% owner.blogsArray.forEach(blog => { %>
-              <div class="card blog-post-card p-0 mb-3">
-                <div class="card-body p-4">
-                  <h4>
-                    <a href="/blog/openBlog/<%= blog._id %>" class="blog-title">
+              <a href="/blog/openBlog/<%= blog._id %>" class="blog-list-card-link">
+                <div class="blog-list-card">
+                  <% if (blog.coverImageUrl) { %>
+                    <div class="blog-list-image-container">
+                      <img 
+                        src="<%= blog.coverImageUrl %>" 
+                        alt="<%= blog.title %> cover image" 
+                        class="blog-list-image"
+                      >
+                    </div>
+                  <% } %>
+                  
+                  <div class="blog-list-content">
+                    <h4 class="blog-list-title">
                       <%= blog.title %>
-                    </a>
-                  </h4>
-                  <p class="blog-date mb-2">
-                    <i class="far fa-calendar-alt me-2 icon-calendar"></i>
-                    <%= new Date(blog.createdAt).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    }) %>
-                  </p>
-                  <p class="blog-preview"><%= blog.body.substring(0, 150) %>
-                    <% if (blog.body.length > 150) { %>
-                      ...
-                    <% } %>
-                  </p>
-                  <div class="blog-footer">
-                    <a href="/blog/openBlog/<%= blog._id %>" class="read-more-link">
-                      Read more <i class="fas fa-arrow-right ms-1"></i>
-                    </a>
+                    </h4>
+                    <p class="blog-list-date">
+                      <i class="far fa-calendar-alt blog-list-date-icon"></i>
+                      <%= new Date(blog.createdAt).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      }) %>
+                    </p>
+                    
+                    <div class="blog-list-footer">
+                      
+                      <div class="blog-list-actions">
+                        <div class="blog-list-comments">
+                          <i class="far fa-comment blog-list-comments-icon"></i>
+                          <span class="blog-list-comments-count">
+                            <%= blog.comments ? blog.comments.length : 0 %> Comments
+                          </span>
+                        </div>
+                        <div class="blog-list-read-more-container">
+                          <span class="blog-list-read-more-btn">
+                            Read More
+                            <svg class="blog-list-read-more-arrow" viewBox="0 0 24 24">
+                              <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
             <% }); %>
           </div>
+
         <% } else { %>
           <div class="empty-state">
             <i class="fas fa-feather-alt fa-3x mb-3 text-muted"></i>

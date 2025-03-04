@@ -53,38 +53,41 @@
   </div>
 </nav>
 
+<!-- IMPROVED ALERT SYSTEM -->
 <% if (locals.message) { %>
-  <% let tp = locals.success ? "alert-success" : "alert-danger"; %>
+  <% let alertType = locals.success ? "success" : "danger"; %>
+  <% let icon = locals.success ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'; %>
+  
   <div id="flashAlert" class="alert-container">
-    <div class="alert <%= tp %> alert-dismissible shadow-sm" role="alert">
-      <i class="bi <%= locals.success ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill' %> me-2"></i>
-      <%- locals.message %>
-      <button type="button" class="btn-close" aria-label="Close"></button>
+    <div class="alert-card alert-<%= alertType %>">
+      <div class="alert-icon">
+        <i class="bi <%= icon %>"></i>
+      </div>
+      <div class="alert-content">
+        <p><%- locals.message %></p>
+      </div>
+      <button type="button" class="alert-close">
+        <i class="bi bi-x"></i>
+      </button>
     </div>
   </div>
 
   <script>
     const alertElement = document.getElementById('flashAlert');
-
-    // Function to show the alert with animation
+    
+    // Show alert with animation
+    setTimeout(() => alertElement.classList.add('show'), 100);
+    
+    // Auto-dismiss after 4 seconds
     setTimeout(() => {
-      alertElement.classList.add('show');
-    }, 100); // Small delay for the animation to feel natural
-
-    // Automatically hide the alert after 3 seconds
-    setTimeout(() => {
-      alertElement.classList.remove('show');
-      setTimeout(() => {
-        alertElement.remove(); // Remove from DOM after animation
-      }, 500); // Match the duration of the slide-up animation
-    }, 3000);
-
-    // Handle close button click
-    alertElement.querySelector('.btn-close').addEventListener('click', () => {
-      alertElement.classList.remove('show');
-      setTimeout(() => {
-        alertElement.remove();
-      }, 500);
+      alertElement.classList.add('hiding');
+      setTimeout(() => alertElement.remove(), 500);
+    }, 4000);
+    
+    // Close button handler
+    document.querySelector('.alert-close').addEventListener('click', () => {
+      alertElement.classList.add('hiding');
+      setTimeout(() => alertElement.remove(), 500);
     });
   </script>
 <% } %>
@@ -105,6 +108,64 @@
         if (href === currentPath || (href !== '/home' && currentPath.startsWith(href))) {
           link.classList.add('active');
         }
+      }
+    });
+  });
+
+//  Preloader Script 
+
+  // Show preloader when navigating away
+  document.addEventListener('DOMContentLoaded', function() {
+    // Hide the preloader when the page is fully loaded
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      setTimeout(function() {
+        preloader.classList.add('fade-out');
+        setTimeout(function() {
+          preloader.style.display = 'none';
+        }, 500);
+      }, 500); // Delay to ensure animations complete
+    });
+    
+    // Show preloader when clicking on links
+    document.querySelectorAll('a:not([href^="#"]):not([target="_blank"])').forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Check if it's an internal link and not a download
+        if (
+          this.hostname === window.location.hostname && 
+          !this.hasAttribute('download') &&
+          this.getAttribute('href') !== '#' &&
+          !e.ctrlKey && 
+          !e.metaKey
+        ) {
+          const preloader = document.getElementById('preloader');
+          preloader.style.display = 'flex';
+          preloader.classList.remove('fade-out');
+          
+          // Small delay to ensure the preloader appears before navigation
+          setTimeout(() => {}, 100);
+        }
+      });
+    });
+    
+    // Handle form submissions
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'flex';
+        preloader.classList.remove('fade-out');
+      });
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        // Page was loaded from cache (back/forward button)
+        const preloader = document.getElementById('preloader');
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
       }
     });
   });

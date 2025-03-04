@@ -4,47 +4,76 @@
     <%- include("./partials/head") %>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log in</title>
-
-    <link rel="stylesheet"  href="/css/login.css" />
-
-
+    <title>Login | InKspire</title>
+    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
+    <%- include("./partials/loader") %>
+
     <%- include("./partials/nav") %> 
 
-    <div class="container">
-      <div class="login-card">
-        <h2>Login</h2>
-        <form action="/user/login" method="post">
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input
-              type="email"
-              name="email"
-              class="form-control"
-              id="email"
-              required
-            />
+    <div class="login-container">
+      <div class="login-wrapper">
+        <div class="login-card">
+          <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue to your dashboard</p>
           </div>
+          
+          <form action="/user/login" method="post" class="login-form" id="loginForm">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <i class="fas fa-envelope input-icon"></i>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email Address"
+                  required
+                />
+                <div class="input-error">Please enter a valid email address</div>
+              </div>
+            </div>
 
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              name="password"
-              class="form-control"
-              id="password"
-              required
-            />
-          </div>
+            <div class="form-group">
+              <div class="input-wrapper">
+                <i class="fas fa-lock input-icon"></i>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  required
+                />
+                <span class="password-toggle">
+                  <i class="fas fa-eye-slash"></i>
+                </span>
+              </div>
+            </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+
+            <button type="submit" class="login-button">
+              Sign In
+            </button>
+            
+            <p class="signup-link">
+              Don't have an account? <a href="/user/signup">Create Account</a>
+            </p>
+          </form>
+        </div>
+
+        <div class="login-decorative-elements">
+          <div class="circle circle-1"></div>
+          <div class="circle circle-2"></div>
+          <div class="circle circle-3"></div>
+        </div>
       </div>
     </div>
 
-
     <%- include("./partials/script") %>
+    <script src="/js/login.client.js"></script>
+    <%- include("./partials/footer") %>
   </body>
 </html>
