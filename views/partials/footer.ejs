@@ -12,7 +12,9 @@
         <h4>Explore</h4>
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="#latest-posts">Latest Posts</a></li>
+            <li>
+                <a href="#" onclick="handleNavigation(event)">Latest Posts</a>
+            </li>
             <li><a href="/create">Write a Post</a></li>
         </ul>
         </div>
@@ -45,4 +47,21 @@
     </div>
     </div>
 </div>
+<li>
+    <a href="#" onclick="handleNavigation(event)">Latest Posts</a>
+  </li>
+  
+  <script>
+    function handleNavigation(event) {
+      event.preventDefault();
+      if (window.location.pathname === "/home") {
+        // Scroll to the "Latest Posts" section if already on the homepage
+        document.getElementById("latest-posts").scrollIntoView({ behavior: "smooth" });
+      } else {
+        // Redirect to the homepage
+        window.location.href = "/home";
+      }
+    }
+  </script>
+  
 </footer>

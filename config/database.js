@@ -6,7 +6,7 @@ exports.dbConnect = () => {
     mongoose.connect(process.env.DB_URL)
     .then(() => {
         console.log("DB connected successfully.✅");
-        console.log("Hello from databse.");
+        console.log("Hello from database.");
     })
     .catch((err) => {
         console.log("DB connection issues.❌")
