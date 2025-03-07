@@ -39,15 +39,15 @@
       <div class="container">
         <h2 class="section-title">Featured Posts</h2>
         <div class="featured-posts">
-          <% if(allBlogs.length > 0) { %>
+          <% if(featuredBlog) { %>
             <div class="featured-card">
-              <img src="<%= allBlogs[0].coverImageUrl %>" alt="Featured post" class="featured-img">
+              <img src="<%= featuredBlog.coverImageUrl %>" alt="Featured post" class="featured-img">
               <div class="featured-content">
-                <h3 class="featured-title"><%= allBlogs[0].title %></h3>
+                <h3 class="featured-title"><%= featuredBlog.title %></h3>
                 <p class="featured-excerpt">
-                  <%- allBlogs[0].body?.substring(0, 63) || "Explore this featured article" %>
+                  <%- featuredBlog.body?.substring(0, 63) || "Explore this featured article" %>
                 </p>
-                <a href="/blog/openBlog/<%= allBlogs[0]._id %>" class="btn btn-primary">Read More</a>
+                <a href="/blog/openBlog/<%= featuredBlog._id %>" class="btn btn-primary">Read More</a>
               </div>
             </div>
           <% } %>

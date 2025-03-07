@@ -66,11 +66,13 @@ app.get("/" , (req,res) =>{
     res.redirect("/home");
 });
 app.get("/home", async (req,res) => {
-    const allBlogs = await Blog.find({}); 
+    const allBlogs = await Blog.find({ title: { $ne: "Welcome to InKspire" } });    
+    const featuredBlog = await Blog.findOne({title: 'Welcome to InKspire'});
 
     res.render("home", {
         user : req.user,
-        allBlogs
+        allBlogs,
+        featuredBlog
     });
 });
 
