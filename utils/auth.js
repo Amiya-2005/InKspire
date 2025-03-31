@@ -14,11 +14,11 @@ const createToken = (user) => {
     return token;
 }
 
-const validateToken = (token) => {
+const decodeToken = (token) => {
     const payload = JWT.verify(token, secret);
     return payload;
 }
 
-module.exports = {createToken, validateToken};
+module.exports = {createToken, decodeToken};
 //create token used in login.js
 //validate used in middleware

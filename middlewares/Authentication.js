@@ -1,4 +1,4 @@
-const {validateToken} = require("../utils/auth");
+const {decodeToken} = require("../utils/auth");
 
 const checkForAuthenticationCookie = (cookieName) => {
     return (req, res, next) => {
@@ -8,7 +8,7 @@ const checkForAuthenticationCookie = (cookieName) => {
         }
         try{
             //console.log("Assigned JWT token is ",tokenCookieValue);
-            const userPayload = validateToken(tokenCookieValue);
+            const userPayload = decodeToken(tokenCookieValue);
             req.user = userPayload;
             return next();
         }

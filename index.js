@@ -9,7 +9,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 const flash = require("connect-flash");
-const session = require("express-session");
+const session = require("express-session"); //for flash-messages
 
 app.use(express.static("public"));
 app.use(session({
