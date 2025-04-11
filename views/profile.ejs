@@ -107,7 +107,7 @@
             <i class="fas fa-feather-alt fa-3x mb-3 text-muted"></i>
             <h4>No blog posts yet</h4>
             <p class="text-muted mb-0">
-              <%= user._id == owner._id ? "You haven't written any blog posts yet. Start writing to see them here!" : "This user hasn't written any blog posts yet." %>
+              <%= user && user._id == owner._id ? "You haven't written any blog posts yet. Start writing to see them here!" : "This user hasn't written any blog posts yet." %>
             </p>
           </div>
         <% } %>
