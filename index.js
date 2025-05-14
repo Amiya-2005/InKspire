@@ -61,12 +61,12 @@ app.use("/user", userHandler);
 //wrote it at last so that token will have been generated before routing 
 
 app.get("/" , (req,res) =>{
-    //return res.render("layout");
     res.redirect("/home");
 });
 app.get("/home", async (req,res) => {
     const allBlogs = await Blog.find({ title: { $ne: "Welcome to InKspire" } });    
     const featuredBlog = await Blog.findOne({title: 'Welcome to InKspire'});
+
 
     res.render("home", {
         user : req.user,
