@@ -5,6 +5,7 @@ node_modules/
 tmp/
 desktop.ini
 zzz.html
+views/z.rough.ejs
 
 # Ignore logs and OS-specific files
 logs/

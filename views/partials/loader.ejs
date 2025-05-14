@@ -1,12 +1,50 @@
-<!-- Preloader -->
-<div id="preloader">
-    <div class="loader-container">
-      <div class="brand-loader">
-        <i class="bi bi-journal-richtext"></i>
-        <span>InKspire</span>
-      </div>
-      <div class="spinner"></div>
-      <p class="loading-text">Loading...</p>
-    </div>
+<!-- Loader -->
+
+<style>
+  #loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #1a2a3a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  #loader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+  }
+</style>
+
+
+<script type="module">
+  //No script to show the loader while transition ?? 
+  //Each time backend renders a file it comes at it's original (typed) state and 
+  //When we add loader component into the file at first position it renders the loader "WITHOUT THE .fade-out CLASS" 
+  //(Since it is typed like that)
+  document.addEventListener('DOMContentLoaded', function() {
+    // Script to Hide the loader
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('loader');
+      setTimeout(function() {
+        loader.classList.add('fade-out');
+        setTimeout(function() {
+          loader.style.display = 'none';
+        }, 500);
+      }, 500); // Delay to ensure animations complete
+    });
+  });
+</script>
+
+<div id="loader">
+  <div class="spinner-border text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </div>
-  
+
+

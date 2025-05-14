@@ -50,7 +50,6 @@ const PORT = process.env.PORT || 4000;
 app.use(express.static(path.resolve("public")));
 
 
-
 app.use(express.urlencoded({extended : true}));
 app.use(cookieParser());
 //cookieParser is a factory function which gives middleware functions as op so to use middle wares we need to write cookieParser()  i.e called the factory function

@@ -1,20 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("./User");
 const transporter = require("../config/mailSender");
-
-
-// Comment Sub-Schema with timestamps
-const commentSchema = new mongoose.Schema({
-    person: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    content: {
-        type: String,
-        required: true,
-    },
-}, { timestamps: true });
 
 const blogSchema = new mongoose.Schema({
     title : {
@@ -52,7 +37,10 @@ const blogSchema = new mongoose.Schema({
          }],
          default : []
     },
-    comments : [commentSchema],
+    comments : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Comment", 
+    }],
 }, { timestamps: true });
 
 

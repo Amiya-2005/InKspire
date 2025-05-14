@@ -126,6 +126,15 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.blog-editor:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+}
+
+.blog-editor-button.active {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
 .blog-editor-toolbar {
   display: flex;
   gap: 0.5rem;
@@ -151,9 +160,13 @@
 }
 
 .blog-editor {
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 250px;
+  text-align: left;
   overflow-y: auto;
+  max-height: 500px;
+  padding: 12px;
+  outline: none;
+  white-space: pre-wrap;
 }
 
 .blog-char-counter {

@@ -5,7 +5,7 @@ const addBlog = require("../controllers/addBlog");
 const openBlog = require("../controllers/openBlog");
 const editBlog = require("../controllers/editBlog");
 const deleteBlog = require("../controllers/deleteBlog");
-const commentBlog = require("../controllers/commentBlog");
+const {postComment, deleteComment} = require("../controllers/commentBlog");
 
 
 router.get("/addBlog", (req,res) => {
@@ -17,7 +17,8 @@ router.get("/addBlog", (req,res) => {
 router.get("/editBlog/:blogId", editBlog.getReq);
 
 
-router.post("/commentBlog/:blogId", commentBlog);
+router.post("/postComment/:blogId", postComment);
+router.post("/deleteComment/:commentId", deleteComment);
 router.post("/deleteBlog/:blogId", deleteBlog);
 
 router.post("/addBlog", addBlog);

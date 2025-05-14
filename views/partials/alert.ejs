@@ -1,0 +1,66 @@
+<!-- ALERT SYSTEM -->
+<!-- Hidden div carrying EJS data -->
+<div
+  id="alertData"
+  data-message="<%- locals.message || '' %>"
+  data-success="<%= locals.success === true %>"
+  class="hidden"
+></div>
+
+<link rel="stylesheet" href="/css/alert.css" />
+
+
+<script>
+  function showAlert(message, type = "success") {
+    const icon =
+      type === "success"
+        ? "bi-check-circle-fill"
+        : "bi-exclamation-triangle-fill";
+
+    const alertHTML = `
+      <div class="flashAlert alert-container">
+        <div class="alert-card alert-${type}">
+          <div class="alert-icon">
+            <i class="bi ${icon}"></i>
+          </div>
+          <div class="alert-content">
+            <p>${message}</p>
+          </div>
+          <button type="button" class="alert-close">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+      </div>
+    `;
+    console.log(alertHTML);
+
+    document.body.insertAdjacentHTML("beforeend", alertHTML);
+
+    const alertElement = document.querySelector(".flashAlert");
+
+    setTimeout(() => alertElement.classList.add("show"), 100);
+
+    // Auto-dismiss after 4 seconds
+    setTimeout(() => {
+      alertElement.classList.add("hiding");
+      setTimeout(() => alertElement.remove(), 500);
+    }, 4000);
+
+    // Manual dismiss
+    document.querySelector(".alert-close").addEventListener("click", () => {
+      alertElement.classList.add("hiding");
+      setTimeout(() => alertElement.remove(), 500);
+    });
+  }
+
+
+  //checking for flash-alerts after rendering done
+  const dataEl = document.getElementById("alertData");
+  const message = dataEl.dataset.message;
+  const success = dataEl.dataset.success === "true";
+
+  if (message) {
+    const alertType = success ? "success" : "danger";
+    showAlert(message, alertType);
+  }
+</script>

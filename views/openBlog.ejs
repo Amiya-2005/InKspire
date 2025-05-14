@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="/css/footer.css" />
   </head>
   <body>
-    <%- include("./partials/loader") %>
-
-    <%- include("./partials/nav") %> <% const blog = specificBlog %>
+    <%- include("./partials/loader") %> <%- include("./partials/nav") %> <%
+    const blog = specificBlog %> <% const author = specificBlog.createdBy %>
 
     <div class="container">
       <!-- Blog Card -->
@@ -125,8 +124,6 @@
               <% } %>
             </div>
           </div>
-
-
         </div>
       </div>
 
@@ -136,7 +133,6 @@
           <i class="bi bi-chat-left-text me-2"></i>Comments (<%=
           blog.comments.length %>)
         </h4>
-
 
         <% if (blog.comments.length === 0) { %>
         <div class="empty-comments text-center py-4">
@@ -151,7 +147,9 @@
           <div
             class="comment-item <%= index < blog.comments.length - 1 ? 'mb-4 pb-4 border-bottom' : '' %>"
           >
-            <div class="comment-header d-flex align-items-center mb-3">
+            <div
+              class="comment-header d-flex align-items-center justify-content-between mb-3"
+            >
               <div class="author-info comment-author">
                 <a href="/user/profile/<%= comment.person._id %>">
                   <% if (comment.person.profilePic) { %>
@@ -166,7 +164,7 @@
                   </div>
                   <% } %>
                 </a>
-                <div class="comment-meta">
+                <div class="comment-meta"">
                   <a
                     href="/user/profile/<%= comment.person._id %>"
                     class="author-name"
@@ -181,6 +179,17 @@
               </div>
 
 
+            <% if (locals.user && user._id == comment.person._id) { %>
+              <form
+                action="/blog/deleteComment/<%= comment._id %>"
+                method="post"
+              >
+                <button type="submit" style="margin-right: 1.5rem; font-size: 1.3rem;color: red; border:none; border-radius:10%">
+                  <i id="delete-comment-trash" class="bi bi-trash"></i>
+                </button>
+              </form>
+
+            <% } %>
 
             </div>
             <div class="comment-content">
@@ -194,7 +203,7 @@
           <h5 class="mb-3">Add a comment</h5>
           <form
             class="comment-form"
-            action="/blog/commentBlog/<%= locals.specificBlog._id %>"
+            action="/blog/postComment/<%= locals.specificBlog._id %>"
             method="post"
           >
             <div class="form-floating mb-3">
@@ -235,8 +244,10 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-          document.querySelectorAll(".ql-tooltip").forEach((element) => element.remove());
-      })
+        document
+          .querySelectorAll(".ql-tooltip")
+          .forEach((element) => element.remove());
+      });
       document.addEventListener("DOMContentLoaded", function () {
         // Example: Smooth scrolling for comment section
         const commentLinks = document.querySelectorAll(".comment-link");
@@ -395,6 +406,5 @@
       });
     </script>
     <%- include("./partials/footer") %>
-
   </body>
 </html>

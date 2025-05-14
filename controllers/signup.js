@@ -1,5 +1,4 @@
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 
 const signup =async (req, res) => {
     const { fullName, email, password } = req.body;
@@ -14,13 +13,13 @@ const signup =async (req, res) => {
             req.flash("success", false);
             return res.redirect("/user/login");
         }
-        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
             fullName,
             email,
-            password: hashedPassword,
+            password,
         });
+        //hashing is to be done in pre hook of User.js
 
         console.log("User signed up successfully.", user);
 

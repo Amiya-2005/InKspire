@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="/css/nav.css" />
+
+<%- include("./alert") %>
+
 <nav class="navbar navbar-expand-lg bg-custom sticky-top" data-bs-theme="dark">
   <div class="container-fluid">
     <!-- Brand Logo -->
@@ -6,7 +10,15 @@
     </a>
 
     <!-- Navbar Toggler (For Mobile View) -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -19,153 +31,86 @@
           </a>
         </li>
         <% if (locals.user) { %>
-          <li class="nav-item">
-            <a class="nav-link nav-animate" href="/blog/addBlog">
-              <i class="bi bi-plus-circle me-1"></i> Add Blog
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle nav-animate d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="<%= user.profilePic || '/images/default.jpeg' %>" alt="Profile Picture" class="rounded-circle me-2" width="32" height="32">
-              <span class="fw-medium"><%= user.fullName %></span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-              <li><a class="dropdown-item d-flex align-items-center" href="/user/profile/<%= user._id %>"><i class="bi bi-person-circle me-2"></i> Profile</a></li>
-              <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item d-flex align-items-center text-danger" href="/user/logout"><i class="bi bi-box-arrow-right me-2"></i> Log out</a></li>
-            </ul>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link nav-animate" href="/blog/addBlog">
+            <i class="bi bi-plus-circle me-1"></i> Add Blog
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle nav-animate d-flex align-items-center"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="<%= user.profilePic || '/images/default.jpeg' %>"
+              alt="Profile Picture"
+              class="rounded-circle me-2"
+              width="32"
+              height="32"
+            />
+            <span class="fw-medium"><%= user.fullName %></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center"
+                href="/user/profile/<%= user._id %>"
+                ><i class="bi bi-person-circle me-2"></i> Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#"
+                ><i class="bi bi-gear me-2"></i> Settings</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item d-flex align-items-center text-danger"
+                href="/user/logout"
+                ><i class="bi bi-box-arrow-right me-2"></i> Log out</a
+              >
+            </li>
+          </ul>
+        </li>
         <% } else { %>
-          <li class="nav-item">
-            <a class="nav-link nav-animate" href="/user/signup">
-              <i class="bi bi-person-plus me-1"></i> Sign up
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-animate" href="/user/login">
-              <i class="bi bi-box-arrow-in-right me-1"></i> Login
-            </a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link nav-animate" href="/user/signup">
+            <i class="bi bi-person-plus me-1"></i> Sign up
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-animate" href="/user/login">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          </a>
+        </li>
         <% } %>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- IMPROVED ALERT SYSTEM -->
-<% if (locals.message) { %>
-  <% let alertType = locals.success ? "success" : "danger"; %>
-  <% let icon = locals.success ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'; %>
-  
-  <div id="flashAlert" class="alert-container">
-    <div class="alert-card alert-<%= alertType %>">
-      <div class="alert-icon">
-        <i class="bi <%= icon %>"></i>
-      </div>
-      <div class="alert-content">
-        <p><%- locals.message %></p>
-      </div>
-      <button type="button" class="alert-close">
-        <i class="bi bi-x"></i>
-      </button>
-    </div>
-  </div>
 
-  <script>
-    const alertElement = document.getElementById('flashAlert');
-    
-    // Show alert with animation
-    setTimeout(() => alertElement.classList.add('show'), 100);
-    
-    // Auto-dismiss after 4 seconds
-    setTimeout(() => {
-      alertElement.classList.add('hiding');
-      setTimeout(() => alertElement.remove(), 500);
-    }, 4000);
-    
-    // Close button handler
-    document.querySelector('.alert-close').addEventListener('click', () => {
-      alertElement.classList.add('hiding');
-      setTimeout(() => alertElement.remove(), 500);
-    });
-  </script>
-<% } %>
-
-<!-- Custom CSS for styling and animations -->
-<link rel="stylesheet" href="/css/nav.css" />
-
-<!-- Client-side script to highlight the active tab -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+//  Client-side script to highlight the active tab
+
+  document.addEventListener("DOMContentLoaded", function () {
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
 
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href');
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
       // Only process valid hrefs (skip dropdown toggles or '#')
-      if (href && href !== '#') {
-        if (href === currentPath || (href !== '/home' && currentPath.startsWith(href))) {
-          link.classList.add('active');
-        }
-      }
-    });
-  });
-
-//  Preloader Script 
-
-  // Show preloader when navigating away
-  document.addEventListener('DOMContentLoaded', function() {
-    // Hide the preloader when the page is fully loaded
-    window.addEventListener('load', function() {
-      const preloader = document.getElementById('preloader');
-      setTimeout(function() {
-        preloader.classList.add('fade-out');
-        setTimeout(function() {
-          preloader.style.display = 'none';
-        }, 500);
-      }, 500); // Delay to ensure animations complete
-    });
-    
-    // Show preloader when clicking on links
-    document.querySelectorAll('a:not([href^="#"]):not([target="_blank"])').forEach(link => {
-      link.addEventListener('click', function(e) {
-        // Check if it's an internal link and not a download
+      if (href && href !== "#") {
         if (
-          this.hostname === window.location.hostname && 
-          !this.hasAttribute('download') &&
-          this.getAttribute('href') !== '#' &&
-          !e.ctrlKey && 
-          !e.metaKey
+          href === currentPath ||
+          (href !== "/home" && currentPath.startsWith(href))
         ) {
-          const preloader = document.getElementById('preloader');
-          preloader.style.display = 'flex';
-          preloader.classList.remove('fade-out');
-          
-          // Small delay to ensure the preloader appears before navigation
-          setTimeout(() => {}, 100);
+          link.classList.add("active");
         }
-      });
-    });
-    
-    // Handle form submissions
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', function() {
-        const preloader = document.getElementById('preloader');
-        preloader.style.display = 'flex';
-        preloader.classList.remove('fade-out');
-      });
-    });
-    
-    // Handle browser back/forward buttons
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        // Page was loaded from cache (back/forward button)
-        const preloader = document.getElementById('preloader');
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, 500);
       }
     });
   });
