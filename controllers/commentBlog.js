@@ -59,7 +59,7 @@ exports.deleteComment = async (req, res) => {
 
             return res.redirect(`/blog/openBlog/${req.params.blogId}`);
         }
-        if (comment.person._id.toString() != user._id) {
+        if (comment.person._id.toString() !== user._id) {
             req.flash("message", "<strong>Warning!</strong> You can't delete someone else's comment.");
             req.flash("success", false);
 
