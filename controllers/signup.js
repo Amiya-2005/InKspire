@@ -1,3 +1,4 @@
+const mailer = require("../config/mailSender");
 const User = require("../models/User");
 
 const signup =async (req, res) => {
@@ -12,6 +13,18 @@ const signup =async (req, res) => {
             req.flash("message", "User has already registered before.");
             req.flash("success", false);
             return res.redirect("/user/login");
+        }
+
+        const mailedContent = await mailer(email,
+            "Registered successfully !",
+            `<h2>Hello ${fullName}!</h2><p>Welcome to InKspire<br /></p>`)
+
+            console.log("Mailed content : ", mailedContent);
+
+        if(!mailedContent){
+            req.flash("message", "<strong>Error!</strong> Please use a valid email address.");
+            req.flash("success", false);
+            return res.redirect('back');
         }
 
         const user = await User.create({
