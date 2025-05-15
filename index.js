@@ -43,6 +43,7 @@ const cookieParser = require("cookie-parser");
 const checkForAuthenticationCookie = require("./middlewares/Authentication");
 
 const Blog = require("./models/Blog");
+const { reverse } = require("dns");
 
 const PORT = process.env.PORT || 4000;
 
@@ -64,13 +65,21 @@ app.get("/" , (req,res) =>{
     res.redirect("/home");
 });
 app.get("/home", async (req,res) => {
+    const {user} = req;
     const allBlogs = await Blog.find({ title: { $ne: "Welcome to InKspire" } });    
     const featuredBlog = await Blog.findOne({title: 'Welcome to InKspire'});
+    let myBlogs = [];
+    if(user){
+        myBlogs = allBlogs.filter(blog => blog.createdBy.toString() === user._id);
+        console.log("My blogs : ", myBlogs);
+    }
 
+    allBlogs.reverse();
 
     res.render("home", {
         user : req.user,
         allBlogs,
+        myBlogs,
         featuredBlog
     });
 });
