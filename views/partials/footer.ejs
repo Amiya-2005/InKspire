@@ -1,85 +1,79 @@
 <!-- partials/footer.ejs -->
 <footer class="footer-section">
-  <div class="container">
+<div class="container">
     <div class="footer-content">
-      <div class="footer-logo">
+    <div class="footer-logo">
         <h2>InKspire</h2>
         <p>Share your stories with the world</p>
-      </div>
-
-      <div class="footer-links">
+    </div>
+    
+    <div class="footer-links">
         <div class="footer-column">
-          <h4>Articles</h4>
-          <ul>
+        <h4>Articles</h4>
+        <ul>
             <li>
-              <a href="#" onclick="handleNavigation(event, 'featured-posts')"
-                >Featured Articles</a
-              >
+                <a href="#" onclick="handleNavigation(event, 'featured-posts')">Featured Articles</a>
             </li>
             <li>
-              <a href="#" onclick="handleNavigation(event, 'my-posts')"
-                >My Articles</a
-              >
+                <a href="#" onclick="handleNavigation(event, 'my-posts')">My Articles</a>
             </li>
             <li>
-              <a href="#" onclick="handleNavigation(event, 'latest-posts')"
-                >Latest Articles</a
-              >
+                <a href="#" onclick="handleNavigation(event, 'latest-posts')">Latest Articles</a>
             </li>
-          </ul>
+        </ul>
         </div>
 
         <div class="footer-column">
-          <h4>Explore</h4>
-          <ul>
+        <h4>Explore</h4>
+        <ul>
             <li><a href="#" onclick="handleNavigation(event, '#')">Home</a></li>
             <li><a href="/create">Write a Post</a></li>
-          </ul>
+        </ul>
         </div>
-
+        
         <div class="footer-column">
-          <h4>Account</h4>
-          <ul>
+        <h4>Account</h4>
+        <ul>
             <li><a href="/user/login">Login</a></li>
             <li><a href="/user/signup">Register</a></li>
-          </ul>
+        </ul>
         </div>
-
+        
         <div class="footer-column">
-          <h4>Contact</h4>
-          <ul>
+        <h4>Contact</h4>
+        <ul>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Privacy Policy</a></li>
-          </ul>
+        </ul>
         </div>
-      </div>
     </div>
-
+    </div>
+    
     <div class="footer-bottom">
-      <p>
-        &copy; <%= new Date().getFullYear() %> InKspire. All rights reserved.
-      </p>
-      <div class="social-icons">
+    <p>&copy; <%= new Date().getFullYear() %> InKspire. All rights reserved.</p>
+    <div class="social-icons">
         <a href="#" class="social-icon"><i class="fa fa-facebook"></i></a>
         <a href="#" class="social-icon"><i class="fa fa-twitter"></i></a>
         <a href="#" class="social-icon"><i class="fa fa-instagram"></i></a>
-      </div>
     </div>
-  </div>
+    </div>
+</div>
 
+  
   <script>
     function handleNavigation(event, targetId) {
       event.preventDefault();
       if (window.location.pathname === "/home") {
         // Scroll to the "Latest Posts" section if already on the homepage
         const section = document.getElementById(targetId);
-        if (section) section.scrollIntoView({ behavior: "smooth" });
-        else window.scrollTo({ top: 0, behavior: "smooth" });
+        if(section) section.scrollIntoView({ behavior: "smooth" });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         // Redirect to the homepage
         window.location.href = "/home";
       }
     }
   </script>
+  
 </footer>
